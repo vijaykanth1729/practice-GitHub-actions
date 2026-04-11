@@ -22,3 +22,11 @@ jobs:
                 echo "This is a multi-line script."
                 echo "You can run multiple commands here."
                 echo "This is useful for complex build steps."
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v2
+            
+            - name: run tests
+              run: echo "Running tests..."
