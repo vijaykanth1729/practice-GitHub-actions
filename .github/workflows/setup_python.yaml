@@ -1,0 +1,32 @@
+name: setup python workflow
+on:
+    workflow_dispatch:
+jobs:
+    setup-python:
+        runs-on: ubuntu-latest
+        steps:
+            - name: chekout code
+              uses: actions/checkout@v2
+            
+            - name: setup python
+              uses: actions/setup-python@v2
+              with:
+                python-version: 3.8
+            
+            - name: install dependencies
+              run: |
+                python -m pip install --upgrade pip
+                pip install -r requirements.txt
+
+            - name: run application code
+              run: python app.py
+    
+    completion:
+        runs-on: ubuntu-latest
+        needs: setup-python
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v2
+            
+            - name: execution finished
+              run: echo "everythinghas been executed successfully.."
