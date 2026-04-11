@@ -1,0 +1,16 @@
+Elastic Stack (ELK)
+
+👉 Situation:
+Logs were scattered across servers, hard to debug issues.
+
+👉 Action:
+Used Filebeat → Logstash → Elasticsearch → Kibana for centralized logging.
+
+👉 Result:
+
+Centralized logs
+Faster debugging
+Improved root cause analysis
+
+👉 Use case line:
+“Used ELK stack for centralized logging and real-time log analysis.”

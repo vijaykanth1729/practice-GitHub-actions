@@ -1,0 +1,17 @@
+Kubernetes (EKS)
+----------------
+
+Situation:
+    Monolithic app needed better scalability and fault tolerance.
+
+Action:
+    Migrated to microservices on Kubernetes (EKS), used Deployments, Services, HPA, and Ingress (ALB).
+
+Result:
+
+    Achieved auto-scaling based on load
+    Improved availability across AZs
+    Zero-downtime deployments
+
+Use case line:
+    “Used Kubernetes for orchestration, auto-scaling, and self-healing of containerized apps.”

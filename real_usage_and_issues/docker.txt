@@ -1,0 +1,17 @@
+Docker:
+------
+
+Situation:
+         Application had inconsistent environments across dev and prod causing “works on my machine” issues.
+
+Action:
+         Containerized application using Docker, created Dockerfile, standardized base image, and pushed images to ECR.
+
+Result:
+
+        Eliminated environment issues
+        Reduced deployment failures by ~80%
+        Faster onboarding for new developers
+
+Use case line:
+        “Used Docker to ensure consistent runtime across environments and simplify deployments.”
