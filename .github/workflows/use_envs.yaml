@@ -1,0 +1,25 @@
+name: usage of envs in workflow
+on:
+    workflow_dispatch:
+env:
+    APP_NAME: "My Awesome App"
+jobs:
+    use-envs:
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v2
+            
+            - name: set environment variables
+              run: |
+                echo "GREETING=Hello, World!" >> $GITHUB_ENV
+                echo "FAREWELL=Goodbye, World!" >> $GITHUB_ENV
+            
+            - name: use environment variables
+              run: |
+                echo "$GREETING"
+                echo "$FAREWELL"
+
+            - name: access env variable defined at workflow level
+              run: |
+                echo "The application name is: $APP_NAME"
