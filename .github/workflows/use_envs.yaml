@@ -1,5 +1,8 @@
 name: usage of envs in workflow
 on:
+    push:
+        branches:
+            - test
     workflow_dispatch:
 env:
     APP_NAME: "My Awesome App"
