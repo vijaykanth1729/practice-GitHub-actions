@@ -2,7 +2,7 @@ name: usage of envs in workflow
 on:
     workflow_dispatch:
 env:
-    APP_NAME: "My Awesome App"
+    APP_NAME: "My Awesome App updated"
 jobs:
     use-envs:
         runs-on: ubuntu-latest
