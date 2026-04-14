@@ -1,0 +1,14 @@
+give a name to workflow..
+and identify how u want to trigger the workflow..
+define your jobs and identify where to run them
+and list the required steps to perform build and push the docker image to dockerhub.
+
+1) first we checkout the code..
+2) Login to the dockerHub 
+3)build the docker image & we can push the image to registry..
+
+during this process, we can parameterize some variables as environment variables like image name and tags..
+
+
+
+
