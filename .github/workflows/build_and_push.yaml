@@ -1,9 +1,9 @@
 name: Docker Build and Push
 on:
     workflow_dispatch:
-env:
-    IMAGE_NAME: "my-flask-app"
-    TAG: "latest"
+# env:
+#     IMAGE_NAME: "my-flask-app"
+#     TAG: "latest"
 jobs:
     build_and_push:
         runs-on: ubuntu-latest
@@ -21,18 +21,18 @@ jobs:
               with:
                 context: .
                 push: true
-                tags: ${{ secrets.DOCKER_USERNAME }}/$IMAGE_NAME:$TAG
+                tags: ${{ secrets.DOCKER_USERNAME }}/my-flask-app:latest
             
             - name: Logout from Docker Hub
               run: docker logout
             
             - name: Verify Docker Image
               run: |
-                docker pull ${{ secrets.DOCKER_USERNAME }}/$IMAGE_NAME:$TAG
-                docker images ${{ secrets.DOCKER_USERNAME }}/$IMAGE_NAME:$TAG
+                docker pull ${{ secrets.DOCKER_USERNAME }}/my-flask-app:latest
+                docker images ${{ secrets.DOCKER_USERNAME }}/my-flask-app:latest
             - name: Test Docker Image
               run: |
-                docker run --rm ${{ secrets.DOCKER_USERNAME }}/$IMAGE_NAME:$TAG python app.py
+                docker run --rm ${{ secrets.DOCKER_USERNAME }}/my-flask-app:latest python app.py
             
             
              
