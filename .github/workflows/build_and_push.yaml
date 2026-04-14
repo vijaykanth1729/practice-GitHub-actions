@@ -2,7 +2,7 @@ name: Docker Build and Push
 on:
     workflow_dispatch:
 env:
-    IMAGE_NAME: "MY-FLASK-APP"
+    IMAGE_NAME: "my-flask-app"
     TAG: "latest"
 jobs:
     build_and_push:
