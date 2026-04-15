@@ -1,0 +1,122 @@
+Ansible is a configuration management tool, used to configure packages or install packages
+across multiple servers at a time..
+
+If you do manually, u need to ssh into each machine and perform the activity, but if u allocate
+same task to ansible , it can do in minutes of time.
+
+Architecture:
+----------------
+Controller (Master Node)
+
+Worker (slave nodes)
+
+In the controller node, u setup ansible and write your playbooks, then apply those playbooks on all the existing
+worker nodes automatically..
+
+ansible used push based mechanisam , meaning it pushes tasks on to worker nodes, and asible is strictly
+and agentless based approach.
+
+OLD WAY(Manual):
+--------------
+You--SSH--SERVER1-->run command
+you --SSH--SERVER2 -->Run command
+
+you repeat 50 times..
+
+Ansible way (NEW WAY):
+----------------------
+You-->ansible-playbook -->SERVER1
+                       -->SERVER2
+                       --->server3
+
+Control Node:
+---------------
+Inventory (WHO): it is a file which holds all the target machine details..
+
+playbook(What): what actions that u will take on the remote servers will be mentioned in playbooks..
+
+Modules: thease are prebuilt which u can leverage to perform some tasks..
+
+Worker node:
+--------------
+managed nodes (it can be any server.)
+
+Idempotency --The core principle:
+----------------------------------
+Idempotency means running the same task 10 times gives the same result as running it once..
+if nginx is already installed , ansible wont install it again.
+
+
+demo:
+---------
+launch 2 ec2 instances in aws (ubuntu)
+and allow port 22 form everywhere.
+enable ALL ICMP IPV4 port this is used for ping response.
+if u need any webserver , we can open port 80..
+
+once 2 servers are ready, we tag them one as master and other as worker.
+
+we will login into master node using ssh with our pem file.
+so once we logged in, now its time to establish communication between our master to worker nodes..
+
+u do by generating a public and private key files using ssh-keygen command.
+
+eg: ssh-keygen -t rsa -b 4096
+
+and once those keys exist we copy public key to the worker node and place that public key in authorized_keys section in ~/.ssh folder
+
+then if we try ssh ubuntu@worker-ip  (login will work automatically without entering any password.)
+
+Anisble working flow:
+----------------------
+you need inventory file (.ini) (WE CREATE inventory in master node..)
+
+touch hosts
+vi hosts
+
+[webservers]
+worker1 anisble_host=IP_OF_WORKER1 anisble_user=USERNAME OF WORKER NODE.
+
+ansible all -i inventory.ini -m ping (used for pinging andchecking response)
+
+Run Ad-hoc commands -- no playbook needed.
+
+# check disk space on all servers
+ansible all -i inventory.ini -m command -a "df -h"
+
+# check memory
+
+ansible all -i inventory.ini -m command -a "free -m"
+
+# check os version
+
+ansible all -i inventory.ini -m command -a "cat /etc/os-release"
+
+# uptime of server.
+
+ansible webservers -i inventory.ini -m command -a "uptime"
+
+
+Playbook syntax:
+------------------
+
+---
+- name: Define what the playbook does
+  hosts: all/groupname/target name (eg: hosts: worker1 / webservers)
+  become: true (sudo previlages, becomes root user..)
+
+  tasks:
+    - name: install apache2
+      apt:
+        name: apache2
+        state: present
+
+    - name: start apache2 service
+      service:
+        name: apache2
+        state: started
+
+
+once playbook is ready u can run the playbook using below command..
+
+ansible-playbook -i inventory.ini sample.yaml
