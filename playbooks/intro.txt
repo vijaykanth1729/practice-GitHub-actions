@@ -1,0 +1,53 @@
+Problem with basic playbooks:
+----------------------------
+Hardcoded
+Not reusable
+Not scalable
+
+Solution:
+-------------
+Variables + Handlers + Roles == Production ready automation Template
+
+Variables:
+---------------
+Types of variables:
+  -- Inline Variables (Inside the playbook)
+
+  Inventory variables:
+  ---------------------
+  [web]
+  1.2.3.4 ansible_user=ubuntu
+  app_port = 80
+
+External Variable File:
+-------------------------
+create vars.yaml
+
+package_name: nginx
+
+
+Command Line variables: (This has highest precedence):
+------------------------------------------------------
+ansible-playbook  -i Inventory playbook.yaml -e "package_name=apache2"
+
+ansible all -i inventory.ini  -m apt -a "package=apache2 state=absent" --become
+
+Handlers used to notify if something happend in the task..
+
+
+Roles:
+--------
+
+this is a way to refactor everything or arranging the files in better way.
+
+useful for production grade ansible code base..
+
+
+ansible-galaxy init role_name..
+
+tasks/main.yaml
+handlers/main.yaml
+defaults/main.yaml
+
+ansible-galaxy init webserver_role
+

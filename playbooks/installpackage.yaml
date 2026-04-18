@@ -1,0 +1,21 @@
+- name: Install package
+  hosts: worker1
+  become: yes
+
+  vars:   # inline variable.
+    package_name: apache2
+
+  # vars_files:
+  #   - vars.yaml
+
+  tasks:
+    - name: Install package
+      apt:
+        name: "{{ package_name }}"
+        state: present
+
+    - name: Start and enable service
+      service:
+        name: "{{ package_name }}"
+        state: started
+        enabled: yes

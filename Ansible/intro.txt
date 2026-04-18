@@ -120,3 +120,5 @@ Playbook syntax:
 once playbook is ready u can run the playbook using below command..
 
 ansible-playbook -i inventory.ini sample.yaml
+
+

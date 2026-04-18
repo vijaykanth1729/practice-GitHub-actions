@@ -1,0 +1,31 @@
+---
+- name: Set up website with custom page
+  hosts: all
+  become: yes
+  vars:
+    index_content: "<h1>Welcome to {{ package }} server</h1>"
+    package: nginx
+
+  tasks:
+    - name: Install {{ package }}
+      apt:
+        name: "{{ package }}"
+        state: present
+    
+    - name: start {{ package }} service
+      service:
+        name: "{{ package }}"
+        state: started
+        enabled: yes
+    
+    - name: create custom index.html
+      copy:
+        dest: /var/www/html/index.html
+        content: "{{ index_content }}"
+      notify: Restart {{ package }}
+
+  handlers:
+    - name: Restart {{ package }}
+      service:
+        name: "{{ package }}"
+        state: restarted

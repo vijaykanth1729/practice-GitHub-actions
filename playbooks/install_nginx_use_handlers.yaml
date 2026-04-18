@@ -1,0 +1,6 @@
+                                                                                                                    *
+- name: Install package
+  hosts: all
+  become: yes
+  roles:
+    - webserver_role
